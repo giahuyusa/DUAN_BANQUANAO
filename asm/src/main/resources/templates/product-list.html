@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh Sách Sản Phẩm</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<style>
+
+   /* Cố định kích thước ảnh sản phẩm */
+.card-img-top {
+    width: 400px;  
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, border 0.4s ease-in-out;
+    border-radius: 10px;
+}
+
+.card-img-top:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.4);
+    border: 3px solid #ff5252;
+}
+
+.card-img-top:active {
+    transform: scale(0.9) rotate(-2deg);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
+    animation: shake 0.2s ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}
+
+/* Thiết lập carousel toàn màn hình */
+#carouselExampleIndicators {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#carouselExampleIndicators .carousel-inner {
+    width: 100%;
+    height: 100%;
+}
+
+#carouselExampleIndicators .carousel-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
+
+
+<body>
+   				 <div th:insert="~{header}"></div>
+<section class="mt-4">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://bizweb.dktcdn.net/100/446/974/themes/849897/assets/slider_1.jpg?1737340308674" class="d-block w-100" alt="Slide 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://bizweb.dktcdn.net/100/446/974/themes/849897/assets/slider_6.jpg?1737340308674" class="d-block w-100" alt="Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://bizweb.dktcdn.net/100/446/974/themes/849897/assets/slider_2.jpg?1737340308674" class="d-block w-100" alt="Slide 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    
+    <br>
+    <div class="container">
+    <!-- Các nút chuyển đổi danh mục -->
+<div class="text-center mb-4 category-container">
+    <div class="border p-2 mx-2 d-inline-block rounded">
+        <button class="btn category-btn" data-target="bestSeller" onclick="toggleActive(this)">Best Seller</button>
+    </div>
+    <div class="border p-2 mx-2 d-inline-block rounded">
+        <button class="btn category-btn" data-target="newArrivals" onclick="toggleActive(this)">New Arrivals</button>
+    </div>
+    <div class="border p-2 mx-2 d-inline-block rounded">
+        <button class="btn category-btn" data-target="hotSales" onclick="toggleActive(this)">Hot Sales</button>
+    </div>
+</div>
+
+
+    			
+
+        <!-- Best Seller -->
+        <div id="bestSeller" class="category-content">
+            <h3 class="text-center">🔥 Best Seller 🔥</h3>
+            <div class="row">
+                <div th:each="product, productStat : ${bestSeller}" class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <a th:href="@{/sanpham/1}"></a>
+                            <img th:src="@{${product.image}}" class="card-img-top img-fluid h-auto" alt="Ảnh sản phẩm">
+                        </a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+
+                            <div class="rating text-warning">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-alt"></i>
+                            </div>
+
+                            <p class="card-text text-danger fw-bold" 
+                               th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' Đ'}"></p>
+
+                            <div class="mb-2">
+                                <i class="fa fa-heart text-danger"></i>
+                                <i class="fa fa-cart-plus text-primary"></i>
+                            </div>
+
+                            <a href="#" class="btn btn-secondary btn-sm">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Arrivals -->
+        <div id="newArrivals" class="category-content d-none">
+            <h3 class="text-center">🆕 New Arrivals 🆕</h3>
+            <div class="row">
+                <div th:each="product, productStat : ${newArrivals}" class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+                    <div class="card h-100 shadow-sm">
+                            <img th:src="@{${product.image}}" class="card-img-top img-fluid h-auto" alt="Ảnh sản phẩm">
+                        </a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+
+							<div class="rating text-warning">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-alt"></i>
+                            </div>
+
+                            <p class="card-text text-danger fw-bold" 
+                               th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' Đ'}"></p>
+
+                            <a href="#" class="btn btn-secondary btn-sm">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hot Sales -->
+        <div id="hotSales" class="category-content d-none">
+            <h3 class="text-center">💥 Hot Sales 💥</h3>
+            <div class="row">
+                <div th:each="product, productStat : ${hotSales}" class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+                    <div class="card h-100 shadow-sm">
+                            <img th:src="@{${product.image}}" class="card-img-top img-fluid h-auto" alt="Ảnh sản phẩm">
+                        </a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+								<div class="rating text-warning">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-alt"></i>
+                            </div>
+                            <p class="card-text">
+                                <del class="text-muted" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' Đ'}"></del>
+                                <br>
+                                <span class="text-danger fw-bold" th:text="${#numbers.formatDecimal(product.price * 0.9, 0, 'COMMA', 0, 'POINT') + ' Đ'}"></span>
+                            </p>
+
+                            <a href="#" class="btn btn-secondary btn-sm">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="~{footer}"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".category-btn");
+            const categories = document.querySelectorAll(".category-content");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    categories.forEach(category => category.classList.add("d-none"));
+                    document.getElementById(this.getAttribute("data-target")).classList.remove("d-none");
+                });
+            });
+        });
+    </script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

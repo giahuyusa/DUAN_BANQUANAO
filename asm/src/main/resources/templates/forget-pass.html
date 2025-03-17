@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khôi phục mật khẩu</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="style.css">
+<style type="text/css">
+body {
+	background-color: #f8f9fa;
+	font-family: 'Poppins', sans-serif;
+}
+
+.card {
+	background: white;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.card input {
+	height: 45px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+}
+
+.card input:focus {
+	border-color: #ff5a5f;
+	box-shadow: 0px 0px 10px rgba(255, 90, 95, 0.3);
+}
+
+.btn-danger {
+	background-color: #ff5a5f;
+	border: none;
+	font-weight: bold;
+	padding: 12px;
+	border-radius: 8px;
+}
+
+.btn-danger:hover {
+	background-color: #e0474f;
+}
+
+.navbar-brand img {
+	filter: brightness(1);
+}
+
+.navbar {
+	padding: 15px 0;
+}
+</style>
+</head>
+<body>
+
+	<!-- Header -->
+	<nav class="navbar navbar-light bg-white shadow-sm">
+		<div class="container">
+			<a class="navbar-brand fw-bold" href="/home/index"> <i
+				class="fa-solid fa-gem"></i> DongHanh
+			</a> <a href="#" class="text-danger fw-bold text-decoration-none">Bạn
+				cần giúp đỡ?</a>
+		</div>
+	</nav>
+
+	<!-- Form Đặt lại mật khẩu -->
+	<div class="d-flex justify-content-center align-items-center vh-100">
+		<div class="card p-4 shadow rounded" style="width: 400px;">
+			<div class="text-start">
+				<a href="/auth/login" class="text-danger"><i
+					class="fas fa-arrow-left"></i></a>
+			</div>
+			<h4 class="text-center">Khôi phục mật khẩu</h4>
+			<form action="/account/forgot-password" method="post">
+
+				<input type="text" class="form-control my-3" placeholder="Email"
+					name="email" required>
+				<button type="submit" class="btn btn-danger w-100">TIẾP
+					THEO</button>
+			</form>
+			<div class="text-center mt-3">
+				<p class="text-success" th:text="${successMessage}"></p>
+				<p class="text-danger" th:text="${errorMessage}"></p>
+			</div>
+		</div>
+	</div>
+	<div th:insert="~{footer}"></div>
+	<!-- Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

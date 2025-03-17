@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang quản trị</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
+
+        :root {
+            --green: #27ae60;
+            --black: #192a56;
+            --light-color: #666;
+            --box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+        }
+
+        * {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            text-transform: capitalize;
+            transition: all .2s linear;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .breadcrumb .active {
+            color: #74C0FC;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <button class="btn" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                    <i class="fa-solid fa-bars fa-lg" style="color: #74C0FC;"></i>
+                </button>
+            </div>
+            
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <i class="fa-solid fa-store fa-xl" style="color: #63E6BE;"></i>
+                <p class="offcanvas-title" style="font-size: 1.5rem; font-weight: 600;">
+                    Quản trị
+                </p>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="list-group list-group-flush mb-2">
+                    <p style="font-size: 1.1rem; font-weight: 600;">Quản lý</p>
+                    <a href="/admin/statistics" class="list-group-item" onclick="updateBreadcrumb(event, 'Thống kê')">
+                        <i class="fa-solid fa-house" style="color: #74C0FC;"></i> Thống kê
+                    </a>
+                    <a href="/admin/product/index" class="list-group-item" onclick="updateBreadcrumb(event, 'Quản lý sản phẩm')">
+                        <i class="fa-solid fa-box me-1" style="color: #74C0FC;"></i> Quản lý sản phẩm
+                    </a>
+                    <a href="/admin/orders" class="list-group-item" onclick="updateBreadcrumb(event, 'Quản lý đơn hàng')">
+                        <i class="fa-solid fa-shopping-cart me-1" style="color: #74C0FC;"></i> Quản lý đơn hàng
+                    </a>
+                    <a href="/admin/account/index" class="list-group-item" onclick="updateBreadcrumb(event, 'Quản lý tài khoản')">
+                        <i class="fa-regular fa-user me-1" style="color: #74C0FC;"></i> Quản lý tài khoản
+                    </a>
+                </div>
+                <div class="list-group list-group-flush">
+                    <p style="font-size: 1.1rem; font-weight: 600;">Thêm</p>
+                    <a href="/home/index" class="list-group-item" onclick="updateBreadcrumb(event, 'Cửa hàng')">
+                        <i class="fa-solid fa-plus-circle me-1" style="color: #74C0FC;"></i> Cửa hàng
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+       
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

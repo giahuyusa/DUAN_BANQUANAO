@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style type="text/css">
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 400px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+}
+
+.input-group i {
+    color: #888;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.input-group input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+    background: none;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    box-shadow: 0px 5px 15px rgba(255, 75, 43, 0.3);
+}
+
+.social-login {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.google { background: #db4437; }
+.facebook { background: #1877f2; }
+.twitter { background: #1da1f2; }
+.github { background: #333; }
+
+.social-icons a:hover {
+    opacity: 0.8;
+}
+   .social-icons a:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}	
+.text-center a {
+    color: #2575fc;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.text-center a:hover {
+    color: #6a11cb;
+}
+
+.forget-pass {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #2575fc;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+.forget-pass:hover {
+    color: #6a11cb;
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        
+        <form th:action="@{/account/register}" th:object="${registerForm}" method="post">
+    <h2 class="text-center mb-3">Đăng Ký</h2>
+
+    <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+        <input type="text" class="form-control" placeholder="Tên đăng nhập" th:field="*{username}" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+        <input type="text" class="form-control" placeholder="Họ tên" th:field="*{fullname}" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+        <input type="email" class="form-control" placeholder="Email" th:field="*{email}" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+        <input type="password" class="form-control" placeholder="Mật khẩu" th:field="*{password}" required>
+    </div>
+
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" th:field="*{activated}" id="activated">
+        <label class="form-check-label" for="activated">Kích hoạt tài khoản</label>
+    </div>
+    <div class="input-group mb-3">
+    <span class="input-group-text"><i class="fa-solid fa-user-shield"></i></span>
+    <select class="form-control" th:field="*{admin}" required>
+        <option value="false">Người dùng</option>
+        <option value="true">Quản trị viên</option>
+    </select>
+</div>
+    
+
+    <button class="btn-login" type="submit">Đăng Ký</button>
+</form>
+
+
+        <div class="social-login">
+            <span>Hoặc đăng ký bằng</span>
+            <div class="social-icons">
+                <a href="#" class="google"><i class="fa-brands fa-google"></i></a>
+                <a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="github"><i class="fa-brands fa-github"></i></a>
+            </div>
+             <div class="text-center">
+				<a href="/account/register">Đã có tài khoản</a>
+			</div>
+			  <a class="forget-pass" href="forgot-password">Quên mật khẩu</a>
+        
+         <div class="text-center">
+				<a href="/home/index"><i class="fas fa-arrow-left"></i></a>
+			</div>
+       </div>
+    </div>
+</body>
+</html>
